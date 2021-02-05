@@ -14,10 +14,38 @@ public class MutantService implements IMutantService {
 	private static final Logger LOG = LogManager.getLogger(MutantService.class);
 
 	private static final String SECUENCIA_SOPORTADA = "[ATCG]*";
+	private static final int SIZE_MUTANT_CHAIN = 4;
 
 	@Override
 	public boolean isMutant(String[] dna) throws ValidationException {
 		this.validateChains(dna);
+
+		for (int i = 0; i < dna.length; i++) {
+			for (int j = 0; j < dna.length; j++) {
+
+				//Check row
+				if ( j <= (dna.length - SIZE_MUTANT_CHAIN) ) {
+					//checkRow();
+				}
+
+				//Check col
+				if ( i <= (dna.length - SIZE_MUTANT_CHAIN) ) {
+					//checkCol();
+				}
+
+				//Check Diagonal
+				if ( j <= (dna.length - SIZE_MUTANT_CHAIN) && i <= (dna.length - SIZE_MUTANT_CHAIN) ) {
+					//checkDiagonal();
+				}
+
+				//Check Transversal
+				if ( j >= (SIZE_MUTANT_CHAIN - 1) && i <= (dna.length - SIZE_MUTANT_CHAIN) ) {
+					//checkTransversal();
+				}
+
+			}
+
+		}
 
 		LOG.info("New request");
 		return false;
