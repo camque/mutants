@@ -36,7 +36,7 @@ public class MutantService implements IMutantService {
 					}
 				}
 				
-				if ( count > COUNT_MUTANT_CHAIN ) {
+				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
@@ -48,7 +48,7 @@ public class MutantService implements IMutantService {
 					}
 				}
 				
-				if ( count > COUNT_MUTANT_CHAIN ) {
+				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
@@ -60,7 +60,7 @@ public class MutantService implements IMutantService {
 					}
 				}
 				
-				if ( count > COUNT_MUTANT_CHAIN ) {
+				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
@@ -72,7 +72,7 @@ public class MutantService implements IMutantService {
 					}
 				}
 				
-				if ( count > COUNT_MUTANT_CHAIN ) {
+				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
