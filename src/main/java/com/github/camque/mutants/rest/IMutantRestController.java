@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.github.camque.mutants.dto.MutantRequest;
 import com.github.camque.mutants.dto.MutantResponse;
 
-@RequestMapping("/")
+@RequestMapping("/mutant")
 public interface IMutantRestController {
 
 	@PostMapping

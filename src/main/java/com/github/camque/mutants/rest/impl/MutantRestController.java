@@ -24,7 +24,7 @@ public class MutantRestController implements IMutantRestController {
 
 	@Override
 	public ResponseEntity<MutantResponse> isMutant( @RequestBody MutantRequest request) {
-		LOG.info("New request arrived");
+		LOG.debug("New request arrived");
 
 		MutantResponse response;
 		HttpStatus httpStatus;

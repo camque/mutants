@@ -1,6 +1,7 @@
 package com.github.camque.mutants.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,13 +16,13 @@ public class MutantRequest implements Serializable {
 	private static final long serialVersionUID = 823295825840350915L;
 
 	@JsonProperty("dna")
-	private String[] dna;
+	private List<String> dna;
 
-	public String[] getDna() {
+	public List<String> getDna() {
 		return this.dna;
 	}
 
-	public void setDna(String[] dna) {
+	public void setDna(List<String> dna) {
 		this.dna = dna;
 	}
 
