@@ -10,6 +10,11 @@ import com.github.camque.mutants.dto.MutantResponse;
 @RequestMapping("/mutant")
 public interface IMutantRestController {
 
+	/**
+	 * Validate mutant
+	 * @param request
+	 * @return MutantResponse
+	 */
 	@PostMapping
 	ResponseEntity<MutantResponse> isMutant(MutantRequest request);
 
