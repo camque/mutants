@@ -11,6 +11,8 @@ import javax.annotation.PreDestroy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import com.github.camque.mutants.repository.IMutantStatDao;
 import com.github.camque.mutants.services.IMutantStatService;
 
 @Service
+@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class MutantStatService implements IMutantStatService {
 
 	private static final Logger LOG = LogManager.getLogger(MutantStatService.class);
