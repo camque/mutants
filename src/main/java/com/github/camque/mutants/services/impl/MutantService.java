@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.camque.mutants.exception.ValidationException;
 import com.github.camque.mutants.services.IMutantService;
+import com.github.camque.mutants.services.IMutantStatService;
 import com.github.camque.mutants.utils.StringUtils;
 
 @Service
@@ -19,6 +21,9 @@ public class MutantService implements IMutantService {
 	private static final String SECUENCIA_SOPORTADA = "[ATCG]*";
 	private static final int SIZE_MUTANT_CHAIN = 4;
 	private static final int COUNT_MUTANT_CHAIN = 2;
+
+	@Autowired
+	private IMutantStatService mutantStatService;
 
 	@Override
 	public boolean isMutant(List<String> dna) throws ValidationException {
@@ -35,19 +40,19 @@ public class MutantService implements IMutantService {
 						count++;
 					}
 				}
-				
+
 				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
-				
+
 				//Check col
 				if ( i <= (dna.size() - SIZE_MUTANT_CHAIN) ) {
 					if ( this.checkCol(dna, i, j) ) {
 						count++;
 					}
 				}
-				
+
 				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
@@ -59,7 +64,7 @@ public class MutantService implements IMutantService {
 						count++;
 					}
 				}
-				
+
 				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
@@ -71,19 +76,21 @@ public class MutantService implements IMutantService {
 						count++;
 					}
 				}
-				
+
 				if ( count >= COUNT_MUTANT_CHAIN ) {
 					response = true;
 					break;
 				}
 
 			}
-			
+
 			if ( response ) {
 				break;
 			}
 
 		}
+
+		this.mutantStatService.addStat(response);
 
 		LOG.debug(MessageFormat.format("Mutant validate: {0}", response));
 		return response;
@@ -107,10 +114,10 @@ public class MutantService implements IMutantService {
 				break;
 			}
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Check the columns of the matrix
 	 * @param dna
@@ -129,10 +136,10 @@ public class MutantService implements IMutantService {
 				break;
 			}
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Check the diagonals of the matrix
 	 * @param dna
@@ -151,10 +158,10 @@ public class MutantService implements IMutantService {
 				break;
 			}
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Check the cross-sections of the matrix
 	 * @param dna
@@ -173,7 +180,7 @@ public class MutantService implements IMutantService {
 				break;
 			}
 		}
-		
+
 		return response;
 	}
 
