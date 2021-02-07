@@ -17,13 +17,13 @@ public class StatResponse implements Serializable {
 	private static final long serialVersionUID = 6391070397528489934L;
 
 	@JsonProperty("count_mutant_dna")
-	public Long countMutantDna;
+	private Long countMutantDna;
 
 	@JsonProperty("count_human_dna")
-	public Long countHumanDna;
+	private Long countHumanDna;
 
 	@JsonProperty("ratio")
-	public Double ratio;
+	private Double ratio;
 
 	public StatResponse(Long countMutantDna, Long countHumanDna, Double ratio) {
 		super();
