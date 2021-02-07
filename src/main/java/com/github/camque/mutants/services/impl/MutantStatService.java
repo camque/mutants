@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,15 +41,27 @@ public class MutantStatService implements IMutantStatService {
 		humanCount = new AtomicLong(0);
 	}
 
+	/**
+	 * Start bean get stats
+	 */
 	@PostConstruct
 	private void init() {
+		LOG.info("Init bean");
 		Optional<MutantStat> row = this.dao.findById(ID_ROW);
 		if ( row.isPresent() ) {
 			mutantStat = row.get();
 			mutantCount.set( mutantStat.getValueMutans() );
 			humanCount.set( mutantStat.getValueHumans() );
 		}
-		LOG.info("xyz");
+	}
+
+	/**
+	 * Before destroy bean save stats
+	 */
+	@PreDestroy
+	private void end() {
+		LOG.info("Destroying bean");
+		this.saveStats();
 	}
 
 	@Override
@@ -76,5 +89,29 @@ public class MutantStatService implements IMutantStatService {
 		}
 	}
 
+	@Override
+	public void saveStats() {
+		LOG.info("Saving stats");
+		boolean mustSave = false;
+
+		if ( mutantCount.get() != mutantStat.getValueMutans().longValue() ) {
+			mutantStat.setValueMutans( mutantCount.get() );
+			mustSave = true;
+		}
+
+		if ( humanCount.get() != mutantStat.getValueHumans().longValue() ) {
+			mutantStat.setValueHumans( humanCount.get() );
+			mustSave = true;
+		}
+
+		if ( mustSave ) {
+			this.dao.save(mutantStat);
+			LOG.info("Stats saved");
+		}
+		else {
+			LOG.info("No need to save statistics.");
+		}
+
+	}
 
 }

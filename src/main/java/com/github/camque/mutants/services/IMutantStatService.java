@@ -16,4 +16,9 @@ public interface IMutantStatService {
 	 */
 	void addStat(boolean isMutant);
 
+	/**
+	 * Save acumulate stats
+	 */
+	void saveStats();
+
 }
