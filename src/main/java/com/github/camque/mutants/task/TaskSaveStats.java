@@ -1,4 +1,4 @@
-package com.github.camque.mutants.services.impl;
+package com.github.camque.mutants.task;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ public class TaskSaveStats {
 	@Autowired
 	private IMutantStatService mutantStatService;
 
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 120000, initialDelay = 60000)
 	public void saveStats() {
 		LOG.info("Executing job");
 		this.mutantStatService.saveStats();
